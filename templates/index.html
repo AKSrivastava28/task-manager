@@ -1,0 +1,46 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home - ToDo{% endblock %}
+
+{% block content %}
+<form action="/" method="POST">
+  <div class="mb-3">
+    <label for="title" class="form-label">ToDo Title</label>
+    <input type="text" class="form-control" name="title" id="title" required>
+  </div>
+  <div class="mb-3">
+    <label for="desc" class="form-label">Task Description</label>
+    <input type="text" class="form-control" name="desc" id="desc" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div class="my-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Time</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in alltodo %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ todo.title }}</td>
+        <td>{{ todo.desc }}</td>
+        <td>{{ todo.date_created }}</td>
+        <td>
+          <a href="/delete/{{ todo.sno }}" class="btn btn-light btn-sm mx-1">Delete</a>
+          <a href="/update/{{ todo.sno }}" class="btn btn-light btn-sm mx-2">Update</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
